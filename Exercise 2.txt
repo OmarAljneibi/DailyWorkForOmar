@@ -1,0 +1,127 @@
+Q1. public class NumberClassification {
+
+    // Method to classify the number as Perfect, Abundant, or Deficient
+    public static String classifyNumber(int num) {
+        if (num <= 0) {
+            return "Invalid number";
+        }
+
+        int sum = 0;
+        
+        // Find the sum of factors (aliquot sum) excluding the number itself
+        for (int i = 1; i <= num / 2; i++) {
+            if (num % i == 0) {
+                sum += i; // Add the divisor to the sum if it's a factor of the number
+            }
+        }
+
+        // Compare the sum to the number for classification
+        if (sum == num) {
+            return "Perfect";
+        } else if (sum > num) {
+            return "Abundant";
+        } else {
+            return "Deficient";
+        }
+    }
+
+    public static void main(String[] args) {
+        int numberToCheck = 99; // Change this number to check classification
+
+        // Classify the number and display the result
+        String result = classifyNumber(numberToCheck);
+        System.out.println(numberToCheck + " is a " + result + " number.");
+    }
+}
+
+
+Q2. public class TriangleClassifier {
+
+    public static String classifyTriangle(int side1, int side2, int side3) {
+        if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
+            return "Invalid triangle: sides must be positive";
+        }
+
+        if (side1 == side2 && side2 == side3) {
+            return "Equilateral"; // All sides are equal
+        } else if (side1 == side2 || side1 == side3 || side2 == side3) {
+            return "Isosceles"; // At least two sides are equal
+        } else {
+            return "Scalene"; // All sides are different
+        }
+    }
+
+    public static void main(String[] args) {
+        int side1 = -5;
+        int side2 = -9;
+        int side3 = -5;
+
+        // Classify the triangle and display the result
+        String result = classifyTriangle(side1, side2, side3);
+        System.out.println("Triangle is " + result);
+    }
+}
+
+
+Q3. public class ArmstrongNumber {
+
+    public static boolean isArmstrong(int number) {
+        // Convert the number to a string to find its length
+        String strNum = String.valueOf(number);
+        int length = strNum.length();
+
+        int sum = 0;
+        int temp = number;
+
+        // Calculate the sum of each digit raised to the power of the number of digits
+        while (temp > 0) {
+            int digit = temp % 10;
+            sum += Math.pow(digit, length);
+            temp /= 10;
+        }
+
+        // Check if the sum is equal to the original number
+        return sum == number;
+    }
+
+    public static void main(String[] args) {
+        int num = 378777; // Change this number to check if it's an Armstrong number
+
+        // Check if the number is an Armstrong number and display the result
+        boolean result = isArmstrong(num);
+        if (result) {
+            System.out.println(num + " is an Armstrong number.");
+        } else {
+            System.out.println(num + " is not an Armstrong number.");
+        }
+    }
+}
+
+Q4. public class SquareStarPattern {
+
+    public static void printSquareStar(int size) {
+        if (size < 2) {
+            System.out.println("Invalid size. Size must be 2 or greater.");
+            return;
+        }
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                // Print stars for the first and last rows or columns
+                if (i == 0 || i == size - 1 || j == 0 || j == size - 1) {
+                    System.out.print("* ");
+                } else {
+                    System.out.print("  "); // Print spaces for the inner part of the square
+                }
+            }
+            System.out.println(); // Move to the next line after each row
+        }
+    }
+
+    public static void main(String[] args) {
+        int squareSize = 5; // Change this value to adjust the size of the square
+
+        // Print the square star pattern
+        printSquareStar(squareSize);
+    }
+}
