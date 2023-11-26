@@ -1,0 +1,136 @@
+Q1. public class NumberToRoman {
+    public static void main(String[] args) {
+        int number = 1990;
+        String romanNumeral = convertToRoman(number);
+        System.out.println(number + " in Roman numerals is: " + romanNumeral);
+    }
+
+    public static String convertToRoman(int number) {
+        int[] arabicValues = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] romanSymbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+        StringBuilder romanNumeral = new StringBuilder();
+
+        for (int i = 0; i < arabicValues.length; i++) {
+            while (number >= arabicValues[i]) {
+                romanNumeral.append(romanSymbols[i]);
+                number -= arabicValues[i];
+            }
+        }
+
+        return romanNumeral.toString();
+    }
+}
+
+Q2. public class RaindropSounds {
+    public static void main(String[] args) {
+        int number = 28;
+        String raindropSounds = convertToRaindropSounds(number);
+        System.out.println("Raindrop sounds for " + number + ": " + raindropSounds);
+    }
+
+    public static String convertToRaindropSounds(int number) {
+        StringBuilder result = new StringBuilder();
+
+        if (number % 3 == 0) {
+            result.append("Pling");
+        }
+        if (number % 5 == 0) {
+            result.append("Plang");
+        }
+        if (number % 7 == 0) {
+            result.append("Plong");
+        }
+
+        if (result.length() == 0) {
+            result.append(String.valueOf(number));
+        }
+
+        return result.toString();
+    }
+}
+
+Q3. import java.util.Arrays;
+
+public class AnagramChecker {
+    public static void main(String[] args) {
+        String word1 = "stop";
+        String word2 = "pots";
+
+        boolean areAnagrams = checkAnagram(word1, word2);
+
+        if (areAnagrams) {
+            System.out.println(word1 + " and " + word2 + " are anagrams.");
+        } else {
+            System.out.println(word1 + " and " + word2 + " are not anagrams.");
+        }
+    }
+
+    public static boolean checkAnagram(String word1, String word2) {
+        // Convert both words to lowercase
+        word1 = word1.toLowerCase();
+        word2 = word2.toLowerCase();
+
+        // Remove whitespace from both words
+        word1 = word1.replaceAll("\\s", "");
+        word2 = word2.replaceAll("\\s", "");
+
+        // Convert words to character arrays and sort them
+        char[] charArray1 = word1.toCharArray();
+        char[] charArray2 = word2.toCharArray();
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
+
+        // Compare the sorted character arrays
+        return Arrays.equals(charArray1, charArray2);
+    }
+}
+
+Q4. import java.util.HashMap;
+import java.util.Map;
+
+public class ResistanceDecoder {
+    public static void main(String[] args) {
+        String colors1 = "brown-green";
+        String colors2 = "brown-green-violet";
+
+        int resistance1 = decodeResistance(colors1);
+        int resistance2 = decodeResistance(colors2);
+
+        System.out.println(colors1 + " = " + resistance1);
+        System.out.println(colors2 + " = " + resistance2);
+    }
+
+    public static int decodeResistance(String colors) {
+        String[] colorBands = colors.split("-");
+        Map<String, Integer> colorValues = getColorValues();
+
+        int resistance = 0;
+        int position = 1;
+
+        for (int i = 0; i < Math.min(colorBands.length, 2); i++) {
+            String color = colorBands[i];
+            if (colorValues.containsKey(color)) {
+                resistance = (resistance * 10) + colorValues.get(color);
+                position *= 10;
+            }
+        }
+
+        return resistance;
+    }
+
+    public static Map<String, Integer> getColorValues() {
+        Map<String, Integer> colorValues = new HashMap<>();
+        colorValues.put("black", 0);
+        colorValues.put("brown", 1);
+        colorValues.put("red", 2);
+        colorValues.put("orange", 3);
+        colorValues.put("yellow", 4);
+        colorValues.put("green", 5);
+        colorValues.put("blue", 6);
+        colorValues.put("violet", 7);
+        colorValues.put("grey", 8);
+        colorValues.put("white", 9);
+        return colorValues;
+    }
+}
